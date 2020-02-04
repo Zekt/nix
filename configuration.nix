@@ -44,7 +44,7 @@ in
     alsaUtils
     pulseaudio
     apulse
-	clang
+    clang
     thunderbolt
     bolt
     binutils
@@ -53,7 +53,7 @@ in
     wget
     vim
     neovim
-	ncurses
+    ncurses
     emacs
     gnome3.gdm
     gnome3.gnome-shell
@@ -63,9 +63,9 @@ in
     fcitx-engines.rime
     librime
     firefox-devedition-bin
-	ruby
-	bundler
-	bundix
+    ruby
+    bundler
+    bundix
     chromium
     libreoffice-fresh
     chrome-gnome-shell
@@ -86,12 +86,12 @@ in
     cmake
     lsof
     busybox
-	nodejs
-	yarn
+    nodejs
+    yarn
     ghc
     haskellPackages.alex
     haskellPackages.happy
-	haskellPackages.Agda
+    haskellPackages.Agda
     cabal-install
     stack
     (all-hies.selection { selector = p: { inherit (p) ghc864 ghc844; }; })
@@ -111,7 +111,7 @@ in
     udisks
     nix-index
     zlib
-	tor
+    tor
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
