@@ -17,6 +17,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
+
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -43,18 +44,30 @@ in
     alsaUtils
     pulseaudio
     apulse
+	clang
+    thunderbolt
+    bolt
+    binutils
     inxi
+    tlp
     wget
     vim
     neovim
+	ncurses
+    emacs
     gnome3.gdm
     gnome3.gnome-shell
+    konsole
     fcitx
     fcitx-configtool
     fcitx-engines.rime
     librime
     firefox-devedition-bin
+	ruby
+	bundler
+	bundix
     chromium
+    libreoffice-fresh
     chrome-gnome-shell
     git
     file
@@ -65,19 +78,40 @@ in
     fira-code-symbols
     wqy_microhei
     tmux
+    htop
     (python2.withPackages(ps: with ps; [ pygtk pynvim ]))
     (python3.withPackages(ps: with ps; [ requests pynvim ]))
     gcc
     gnumake
+    cmake
     lsof
     busybox
+	nodejs
+	yarn
     ghc
-    (all-hies.selection { selector = p: { inherit (p) ghc864; }; })
+    haskellPackages.alex
+    haskellPackages.happy
+	haskellPackages.Agda
+    cabal-install
+    stack
+    (all-hies.selection { selector = p: { inherit (p) ghc864 ghc844; }; })
     python27Packages.pip
     python37Packages.pip
     pkg-config
     gnome3.nautilus
     gnome3.nautilus-python
+    wineFull
+    winetricks
+    unrar
+    mount
+    gparted
+    parted
+    ntfs3g
+    cifs-utils
+    udisks
+    nix-index
+    zlib
+	tor
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -102,6 +136,12 @@ in
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.daemon.config = {
+    enable-lfe-remixing = "yes";
+    default-sample-channels = "4";
+    default-channel-map = "front-left,front-right,rear-left,rear-right";
+  };
+  hardware.bluetooth.powerOnBoot = false;
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -115,9 +155,12 @@ in
   services.xserver.desktopManager.gnome3.enable = true;
 
   i18n.inputMethod.enabled = "fcitx";
-  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ rime ];
+  i18n.inputMethod.fcitx.engines = with pkgs.fcitx-engines; [ rime chewing ];
 
   services.gnome3.chrome-gnome-shell.enable = true;
+  services.tlp.enable = true;
+  services.hardware.bolt.enable = true;
+  services.udev.packages = [ pkgs.bolt ];
 
   programs.zsh = {
     enable = true;
